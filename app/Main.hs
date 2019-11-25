@@ -7,8 +7,8 @@ import qualified Telegram.Bot.API                 as Telegram
 import           Telegram.Bot.Simple
 import           Telegram.Bot.Simple.Debug
 import           Telegram.Bot.Simple.UpdateParser
-
-import Commands
+-- Local packages
+import           Commands
 
 -- | Bot conversation state model.
 data Model = Model deriving (Show)
@@ -35,6 +35,7 @@ handleUpdate _ = parseUpdate
     $ Stats <$ command "stats"
   <|> Start <$ command "start"
 
+-- | Handle action recieved from 'handleUpdate'
 handleAction :: Action -> Model -> Eff Action Model
 handleAction action model = case action of
   NoAction -> pure model
@@ -45,6 +46,7 @@ handleAction action model = case action of
     replyText startMessage
     pure NoAction
 
+-- | Create bot environment and start bot
 run :: Telegram.Token -> IO ()
 run token = do
   env <- Telegram.defaultTelegramClientEnv token
