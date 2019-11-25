@@ -3,7 +3,6 @@ resolver: lts-14.2
 packages:
 - .
 
-allow-newer: true
 extra-deps:
   # External dependencies
   - git: https://github.com/fizruk/telegram-bot-simple.git
