@@ -1,0 +1,10 @@
+resolver: lts-14.2
+# 9.17
+packages:
+- .
+
+allow-newer: true
+extra-deps:
+  # External dependencies
+  - git: https://github.com/fizruk/telegram-bot-simple.git
+    commit: 0272c20a2a51c52e96e0ab86768d575cce9923b1
