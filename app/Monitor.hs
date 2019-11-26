@@ -2,7 +2,6 @@
 
 module Monitor where
 
-
 import Foreign
 import Foreign.C.Types
 
