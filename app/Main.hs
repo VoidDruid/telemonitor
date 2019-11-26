@@ -9,6 +9,7 @@ import           Telegram.Bot.Simple.Debug
 import           Telegram.Bot.Simple.UpdateParser
 -- Local packages
 import           Commands
+import           Monitor
 
 -- | Bot conversation state model.
 data Model = Model deriving (Show)
@@ -53,4 +54,5 @@ run token = do
   startBot_ (traceBotDefault bot) env
 
 main :: IO ()
-main = getEnvToken "TELEMONITOR_TOKEN" >>= run
+-- main = getEnvToken "TELEMONITOR_TOKEN" >>= run
+main = print numberOfCores
