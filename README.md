@@ -1,2 +1,2 @@
-# telemonitor
+# Telemonitor
 Telegram bot that helps me monitor my vps.
