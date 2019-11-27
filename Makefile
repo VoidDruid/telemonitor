@@ -1,7 +1,10 @@
-GEN_BIND = "python scripts/generate_bindings.py"
+GEN_BIND = python scripts/generate_bindings.py
 
-build:
-	stack build --exec $(GEN_BIND)
+bind:
+	$(GEN_BIND)
+
+build: bind
+	stack build 
 
 run: build
 	stack run
