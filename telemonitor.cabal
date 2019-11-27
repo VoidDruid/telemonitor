@@ -26,6 +26,7 @@ executable telemonitor-exe
     Paths_telemonitor
     Commands
     Monitor
+    Monitor.Bindings
   hs-source-dirs:
     app
   c-sources:

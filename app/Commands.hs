@@ -2,8 +2,8 @@
 
 module Commands where
 
-import           Data.Text                        (Text)
-import qualified Data.Text                        as Text
+import           Data.Text (Text)
+import qualified Data.Text as Text
 
 -- | A help message to show on conversation start with bot.
 startMessage :: Text

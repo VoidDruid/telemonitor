@@ -1,12 +1,14 @@
-{-# LANGUAGE ForeignFunctionInterface #-}
+{-# LANGUAGE OverloadedStrings #-}
 
 module Monitor where
 
-import Foreign
-import Foreign.C.Types
+import           Data.Text (Text)
+import qualified Data.Text as Text
 
-foreign import ccall unsafe "monitor.h number_of_processors"
-    c_number_of_cores :: CLong
+import qualified Monitor.Bindings as Bindings
 
-numberOfCores :: Integer
-numberOfCores = fromIntegral c_number_of_cores
+ramStats :: Text
+ramStats = Text.unlines
+  [ "Total RAM: " <> Text.pack (show Bindings.totalRam)
+  , "Free RAM: " <> Text.pack (show Bindings.freeRam)
+  ]

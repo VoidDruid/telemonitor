@@ -8,8 +8,8 @@ import           Telegram.Bot.Simple
 import           Telegram.Bot.Simple.Debug
 import           Telegram.Bot.Simple.UpdateParser
 -- Local packages
-import           Commands
-import           Monitor
+import qualified Commands
+import qualified Monitor
 
 -- | Bot conversation state model.
 data Model = Model deriving (Show)
@@ -41,10 +41,10 @@ handleAction :: Action -> Model -> Eff Action Model
 handleAction action model = case action of
   NoAction -> pure model
   Stats -> model <# do
-    replyText statsMessage
+    replyText Commands.statsMessage
     pure NoAction
   Start -> model <# do
-    replyText startMessage
+    replyText Commands.startMessage
     pure NoAction
 
 -- | Create bot environment and start bot
@@ -55,4 +55,4 @@ run token = do
 
 main :: IO ()
 -- main = getEnvToken "TELEMONITOR_TOKEN" >>= run
-main = print numberOfCores
+main = print Monitor.ramStats
