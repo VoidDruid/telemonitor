@@ -16,6 +16,9 @@ numberOfCores = fromIntegral c_number_of_cores
 foreign import ccall unsafe "monitor.h number_of_processes" c_number_of_processes :: CULong
 numberOfProcesses = fromIntegral c_number_of_processes 
 
+foreign import ccall unsafe "monitor.h uptime" c_uptime :: CLong
+uptime = fromIntegral c_uptime /hour
+
 foreign import ccall unsafe "monitor.h free_ram" c_free_ram :: CULong
 freeRam = fromIntegral c_free_ram / megabyte
 

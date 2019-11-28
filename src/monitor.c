@@ -27,3 +27,8 @@ unsigned long number_of_processes() {
     struct sysinfo si = get_sysinfo();
     return si.procs;
 }
+
+long uptime() {
+    struct sysinfo si = get_sysinfo();
+    return si.uptime;
+}

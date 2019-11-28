@@ -55,4 +55,4 @@ run token = do
 
 main :: IO ()
 -- main = getEnvToken "TELEMONITOR_TOKEN" >>= run
-main = print Monitor.ramStats
+main = print Monitor.sysStats
