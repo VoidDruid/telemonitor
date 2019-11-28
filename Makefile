@@ -1,7 +1,7 @@
-GEN_BIND = python scripts/generate_bindings.py
+.PHONY: bind build run
 
 bind:
-	$(GEN_BIND)
+	python scripts/generate_bindings.py
 
 build: bind
 	stack build 
