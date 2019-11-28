@@ -1,0 +1,12 @@
+{-# LANGUAGE ForeignFunctionInterface #-}
+
+module Monitor.Bindings where
+
+import Foreign
+import Foreign.C.Types
+
+minute = 60;
+hour = minute * 60;
+day = hour * 24;
+megabyte = 1024 * 1024;
+
