@@ -9,7 +9,6 @@ import           Telegram.Bot.Simple.Debug
 import           Telegram.Bot.Simple.UpdateParser
 -- Local packages
 import qualified Commands
-import qualified Monitor
 
 -- | Bot conversation state model.
 data Model = Model deriving (Show)
@@ -55,4 +54,4 @@ run token = do
 
 main :: IO ()
 -- main = getEnvToken "TELEMONITOR_TOKEN" >>= run
-main = print Monitor.sysStats
+main = print Commands.statsMessage
