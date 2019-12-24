@@ -40,7 +40,7 @@ handleAction :: Action -> Model -> Eff Action Model
 handleAction action model = case action of
   NoAction -> pure model
   Stats -> model <# do
-    replyText Commands.statsMessage
+    replyText <$> Commands.statsMessage
     pure NoAction
   Start -> model <# do
     replyText Commands.startMessage
@@ -53,5 +53,5 @@ run token = do
   startBot_ (traceBotDefault bot) env
 
 main :: IO ()
--- main = getEnvToken "TELEMONITOR_TOKEN" >>= run
+--main = getEnvToken "TELEMONITOR_TOKEN" >>= run
 main = print Commands.statsMessage

@@ -14,8 +14,8 @@ types_map = {
     'double': 'CDouble',
 }
 
-ff_template = 'foreign import ccall unsafe "monitor.h {function}" c_{function} :: {return_type}'
-hs_template = '{function_hs} = {prefix} c_{function} {suffix}'
+ff_template = 'foreign import ccall unsafe "monitor.h {function}" c_{function} :: IO {return_type}'
+hs_template = '{function_hs} = {suffix} {prefix} c_{function}'
 
 def to_camel_case(snake_str):
     components = snake_str.split('_')
@@ -47,6 +47,13 @@ def c_to_hs(line):
     return_type = ' '.join(line_split[:-1])
 
     ff = ff_template.format(function=function, return_type=types_map[return_type])
+    if suffix:
+        suffix = f'({suffix})'
+        if prefix:
+            suffix += ' .'
+    if prefix:
+        prefix += ' <$>'
+
     hs = hs_template.format(
         function_hs=to_camel_case(function),
         prefix=prefix,

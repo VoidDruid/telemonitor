@@ -19,9 +19,12 @@ startMessage = Text.unlines
  ]
 
 -- | Message with main server stats - cpu, ram, disk.
-statsMessage :: Text
-statsMessage = Text.unlines
- [ "Информация с сервера"
- , removeLastChar Monitor.sysStats
- , removeLastChar Monitor.ramStats
- ]
+statsMessage :: IO Text
+statsMessage = do
+  sysStats <- Monitor.sysStats
+  ramStats <- Monitor.ramStats
+  return $ Text.unlines
+           [ "Информация с сервера"
+           , removeLastChar sysStats
+           , removeLastChar ramStats
+           ]
