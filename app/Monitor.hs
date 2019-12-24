@@ -5,14 +5,13 @@ module Monitor where
 import           Numeric
 import           Data.Text (Text)
 import qualified Data.Text as Text
-
+-- Local packages
 import qualified Monitor.Bindings as Bindings
 
--- Utitlity functions
-
+-- | Return string, representing Double with 2 decimal places
 formatDouble :: Double -> Text
 formatDouble floatNum = Text.pack $ showFFloat (Just 2) floatNum ""
-
+-- | Turn any instance of 'Show' into Text
 toText :: Show a => a -> Text
 toText = Text.pack . show
 
