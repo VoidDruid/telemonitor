@@ -1,0 +1,18 @@
+# Editors
+.idea
+.vscode
+# Build
+scripts
+*~
+# Env
+.env.example
+# Git
+.git
+.gitignore
+# Misc
+LICENSE
+README.md
+ChangeLog.md
+# Docker
+Dockerfile
+.dockerignore

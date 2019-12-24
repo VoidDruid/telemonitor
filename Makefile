@@ -1,4 +1,6 @@
-.PHONY: bind build run
+IMAGE_NAME = telemonitor
+
+.PHONY: bind build run build_docker
 
 bind:
 	python scripts/generate_bindings.py
@@ -8,3 +10,6 @@ build: bind
 
 run: build
 	stack run
+
+build_docker: bind
+	docker build -t $(IMAGE_NAME) .

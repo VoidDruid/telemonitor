@@ -7,15 +7,21 @@ import qualified Data.Text as Text
 
 import qualified Monitor.Bindings as Bindings
 
+toText :: Show a => a -> Text
+toText = Text.pack . show
+
 ramStats' :: [Text]
 ramStats' =
-  [ "Total RAM: " <> Text.pack (show Bindings.totalRam)
-  , "Free RAM: " <> Text.pack (show Bindings.freeRam)
+  [ "Total RAM: " <> toText Bindings.totalRam
+  , "Free RAM: " <> toText Bindings.freeRam
   ]
 
 sysStats' :: [Text]
-sysStats' = ("Uptime: " <> (Text.pack . show $ Bindings.uptime)) : ramStats'
+sysStats' =
+  [ "Uptime: " <> toText Bindings.uptime
+  , "Running processes: " <> toText Bindings.numberOfProcesses
+  ]
 
--- Util functions that return Text
+-- General functions, that return Text, joined with '\n'
 ramStats = Text.unlines ramStats'
 sysStats = Text.unlines sysStats'
