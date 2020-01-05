@@ -38,6 +38,7 @@ executable telemonitor-exe
     base
     -- std deps
     , text
+    , mtl
     -- external deps
     , telegram-bot-simple
   default-language: Haskell2010

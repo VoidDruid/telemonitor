@@ -2,7 +2,10 @@
 
 module Main where
 
+-- Std packages
 import           Control.Applicative              ((<|>))
+import           Control.Monad.Trans              (liftIO)
+-- External packages
 import qualified Telegram.Bot.API                 as Telegram
 import           Telegram.Bot.Simple
 import           Telegram.Bot.Simple.Debug
@@ -26,7 +29,7 @@ bot = BotApp
   { botInitialModel = Model
   , botAction = flip handleUpdate
   , botHandler = handleAction
-  , botJobs = []
+  , botJobs = []  -- TODO: why is this here?
   }
 
 -- | Processes incoming 'Telegram.Update's and turns them into 'Action's.
@@ -39,12 +42,13 @@ handleUpdate _ = parseUpdate
 handleAction :: Action -> Model -> Eff Action Model
 handleAction action model = case action of
   NoAction -> pure model
-  Stats -> model <# do
-    replyText <$> Commands.statsMessage
-    pure NoAction
   Start -> model <# do
     replyText Commands.startMessage
     pure NoAction
+  Stats -> model <# do  -- TODO: what the hell does "<#" mean in this context?
+    stats <- liftIO Commands.statsMessage
+    replyText stats   -- TODO: how does "liftIO" work here, exactly?
+    pure NoAction  -- TODO: if we just write "Stats -> do", in the end we have to put "pure model". Why?
 
 -- | Create bot environment and start bot
 run :: Telegram.Token -> IO ()
@@ -53,5 +57,4 @@ run token = do
   startBot_ (traceBotDefault bot) env
 
 main :: IO ()
---main = getEnvToken "TELEMONITOR_TOKEN" >>= run
-main = print Commands.statsMessage
+main = getEnvToken "TELEMONITOR_TOKEN" >>= run

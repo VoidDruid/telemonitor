@@ -1,18 +1,20 @@
+# Git
+.git
+.gitignore
 # Editors
 .idea
 .vscode
 # Build
 scripts
 *~
-# Env
-.env.example
-# Git
-.git
-.gitignore
+# Top-level scripts
+deploy.sh
+push_image.sh
 # Misc
 LICENSE
 README.md
 ChangeLog.md
+.env.example
 # Docker
 Dockerfile
 .dockerignore

@@ -2,6 +2,7 @@
 
 module Monitor where
 
+-- Std packages
 import           Numeric
 import           Data.Text (Text)
 import qualified Data.Text as Text
