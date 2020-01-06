@@ -5,6 +5,7 @@ module Main where
 -- Std packages
 import           Control.Applicative              ((<|>))
 import           Control.Monad.Trans              (liftIO)
+import           System.Environment               (lookupEnv)
 -- External packages
 import qualified Telegram.Bot.API                 as Telegram
 import           Telegram.Bot.Simple
@@ -54,7 +55,10 @@ handleAction action model = case action of
 run :: Telegram.Token -> IO ()
 run token = do
   env <- Telegram.defaultTelegramClientEnv token
-  startBot_ (traceBotDefault bot) env
+  run_level <- lookupEnv "RUN_LEVEL"
+  case run_level of 
+    Just "production" -> startBot_ bot env
+    _ -> startBot_ (traceBotDefault bot) env
 
 main :: IO ()
 main = getEnvToken "TELEMONITOR_TOKEN" >>= run
