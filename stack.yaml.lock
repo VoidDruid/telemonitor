@@ -18,6 +18,20 @@ packages:
   original:
     git: https://github.com/fizruk/telegram-bot-simple.git
     commit: 0272c20a2a51c52e96e0ab86768d575cce9923b1
+- completed:
+    hackage: docker-0.6.0.2@sha256:9f76513671c407b3c102b4ce9bde6f2f1009ca0f218c7cf024b8e8a944d8a6f9,4044
+    pantry-tree:
+      size: 654
+      sha256: a421baec11539ec879c15eebef2858b675c96dbf93fab7ba9830d8fa23403355
+  original:
+    hackage: docker-0.6.0.2
+- completed:
+    hackage: http-client-0.5.14@sha256:4880b27d6741e331454a1d4c887d96ce3d7d625322c8433983a4b1cd08538577,5348
+    pantry-tree:
+      size: 2457
+      sha256: 02bcffba9cad572fefb4640f5fc9be68e770b32ab73efcac649db20290994c6d
+  original:
+    hackage: http-client-0.5.14
 snapshots:
 - completed:
     size: 523454

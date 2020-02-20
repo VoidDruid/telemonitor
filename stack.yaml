@@ -7,3 +7,5 @@ extra-deps:
   # External dependencies
   - git: https://github.com/fizruk/telegram-bot-simple.git
     commit: 0272c20a2a51c52e96e0ab86768d575cce9923b1
+  - docker-0.6.0.2
+  - http-client-0.5.14

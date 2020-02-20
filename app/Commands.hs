@@ -15,17 +15,32 @@ removeLastChar text = Text.take (Text.length text - 1) text
 startMessage :: Text
 startMessage = Text.unlines
  [ "Доступные команды:"
- , "/start - это сообщение"
+ , "/start либо /help - это сообщение"
+ , "/system - системная информация"
  , "/stats - основная статистика"
+ , "/docker - запущенные контейнеры"
+ , "/ram - информация о памяти"
+ , "/disk - использование диска"
+ , "/cpu - загруженность cpu"
  ]
 
--- | Message with main server stats - cpu, ram, disk.
+-- | Message with main server stats - cpu, ram, disk, docker
 statsMessage :: IO Text
 statsMessage = do
   sysStats <- Monitor.sysStats
   ramStats <- Monitor.ramStats
+  cpuStats <- Monitor.cpuStats
+  diskStats <- Monitor.diskStats
+  containerStats <- Monitor.containersStats
   return $ Text.unlines
-           [ "Информация с сервера"
+           [ "*Системная информация*"
            , removeLastChar sysStats
+           , "\n*CPU*"
+           , removeLastChar cpuStats
+           , "\n*Память*"
            , removeLastChar ramStats
+           , "\n*Диск*"
+           , removeLastChar diskStats
+           , "\n*Docker контейнеры*"
+           , removeLastChar containerStats
            ]
