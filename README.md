@@ -1,12 +1,7 @@
 # Telemonitor
 Telegram bot that helps me monitor my vps.
 
-*work in progress*
-
-TODO:
-- Auth
-- Normal Dockerfile (build inside container)
-- More commands - cpu, disk
+[Telemonitor at docker hub](https://hub.docker.com/r/voidwalker/telemonitor) - `docker pull voidwalker/telemonitor`
 
 Supported commands:
 
@@ -16,3 +11,8 @@ Supported commands:
 - **/ram** - RAM usage
 - **/docker** - running docker containers
 - **/stats** - all available stats
+
+In progress:
+- auth
+- "normal" Dockerfile (build inside container)
+- more commands - cpu, disk
