@@ -37,7 +37,7 @@ bot = BotApp
   { botInitialModel = Model
   , botAction = flip handleUpdate
   , botHandler = handleAction
-  , botJobs = []  -- TODO: why is this here?
+  , botJobs = []
   }
 
 -- | Processes incoming 'Telegram.Update's and turns them into 'Action's.
@@ -56,10 +56,10 @@ help model = model <# do
   replyText Commands.startMessage
   pure NoAction
 
-ioReply model reply = model <# do  -- TODO: what the hell does "<#" mean in this context?
-  replyT <- liftIO reply  -- TODO: how does "liftIO" work here, exactly?
+ioReply model reply = model <# do  -- not sure what "<#" means in this context
+  replyT <- liftIO reply
   replyText replyT
-  pure NoAction  -- TODO: if we just write "Stats -> do", in the end we have to put "pure model". Why?
+  pure NoAction  -- if we just write "Stats -> do", in the end we have to put "pure model"
 
 -- | Handle action recieved from 'handleUpdate'
 handleAction :: Action -> Model -> Eff Action Model
