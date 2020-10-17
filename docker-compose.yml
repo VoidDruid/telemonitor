@@ -1,0 +1,16 @@
+    version: '2'
+
+    services:
+      telemonitor:
+        # 7616439 - hash of the commit for which image was build, check on docker hub for available version
+        image: voidwalker/telemonitor:7616439
+        container_name: telemonitor-app
+        restart: unless-stopped
+        environment:
+          # Place your token instead of bot-token
+          - TELEMONITOR_TOKEN=bot-token
+          # Telegram ids of authorized users
+          - ADMIN_IDS=id1,id2
+          - RUN_LEVEL=production
+        volumes:
+          - "/var/run/docker.sock:/var/run/docker.sock"

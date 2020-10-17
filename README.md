@@ -1,7 +1,15 @@
 # Telemonitor
 Telegram bot that helps me monitor my vps.
 
-[Telemonitor at docker hub](https://hub.docker.com/r/voidwalker/telemonitor) - `docker pull voidwalker/telemonitor`
+>[Telemonitor at docker hub](https://hub.docker.com/r/voidwalker/telemonitor) - `docker pull voidwalker/telemonitor`
+>
+>[docker-compose.yml](https://github.com/VoidDruid/telemonitor/blob/master/docker-compose.yml) - **docker-compose file for deployment**
+
+Required env variables:
+
+- `TELEMONITOR_TOKEN`: telegram bot token
+- `ADMIN_IDS`: comma separated list of telegram ids of users that are allowed to use bot - `id1,id2`
+- `RUN_LEVEL`: set `production` for deployment, it will disable debug logs
 
 Supported commands:
 
@@ -13,6 +21,7 @@ Supported commands:
 - **/stats** - all available stats
 
 In progress:
+
 - auth
 - "normal" Dockerfile (build inside container)
-- more commands - cpu, disk
+- more commands - cpu, disk (for now they return current time as placeholder)
