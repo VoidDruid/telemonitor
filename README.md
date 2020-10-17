@@ -22,6 +22,4 @@ Supported commands:
 
 In progress:
 
-- auth
-- "normal" Dockerfile (build inside container)
 - more commands - cpu, disk (for now they return current time as placeholder)
