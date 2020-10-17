@@ -11,12 +11,12 @@ import qualified Telegram.Bot.API                 as Telegram
 import           Telegram.Bot.Simple
 import           Telegram.Bot.Simple.Debug
 import           Telegram.Bot.Simple.UpdateParser
+import           Data.List.Split                  (splitOn)
 -- Local packages
+import Model
 import qualified Commands
 import qualified Monitor
-
--- | Bot conversation state model.
-data Model = Model deriving (Show)
+import qualified Auth
 
 -- | Actions bot can perform.
 data Action
@@ -31,26 +31,19 @@ data Action
   | Help            -- ^ Display help message
   deriving (Show)
 
--- | Bot application.
-bot :: BotApp Model Action
-bot = BotApp
-  { botInitialModel = Model
-  , botAction = flip handleUpdate
-  , botHandler = handleAction
-  , botJobs = []
-  }
-
 -- | Processes incoming 'Telegram.Update's and turns them into 'Action's.
 handleUpdate :: Model -> Telegram.Update -> Maybe Action
-handleUpdate _ = parseUpdate
-    $ Stats <$ command "stats"
-  <|> System <$ command "system"
-  <|> Docker <$ command "docker"
-  <|> Ram <$ command "ram"
-  <|> Disk <$ command "disk"
-  <|> Cpu <$ command "cpu"
-  <|> Start <$ command "start"
-  <|> Help <$ command "help"
+handleUpdate model update = case authorizer model update of
+  Just string -> Nothing  -- TODO
+  Nothing -> parseUpdate (
+        Stats <$ command "stats"
+    <|> System <$ command "system"
+    <|> Docker <$ command "docker"
+    <|> Ram <$ command "ram"
+    <|> Disk <$ command "disk"
+    <|> Cpu <$ command "cpu"
+    <|> Start <$ command "start"
+    <|> Help <$ command "help" ) update
 
 help model = model <# do
   replyText Commands.startMessage
@@ -59,7 +52,7 @@ help model = model <# do
 ioReply model reply = model <# do  -- not sure what "<#" means in this context
   replyT <- liftIO reply
   replyText replyT
-  pure NoAction  -- if we just write "Stats -> do", in the end we have to put "pure model"
+  pure NoAction
 
 -- | Handle action recieved from 'handleUpdate'
 handleAction :: Action -> Model -> Eff Action Model
@@ -79,6 +72,21 @@ run :: Telegram.Token -> IO ()
 run token = do
   env <- Telegram.defaultTelegramClientEnv token
   run_level <- lookupEnv "RUN_LEVEL"
+  rawIds <- lookupEnv "ADMIN_IDS"
+  let
+    adminIds :: [Telegram.ChatId]
+    adminIds = case rawIds of {
+      Nothing -> [] ;
+      Just rawIdsString -> map (Telegram.ChatId . read) (splitOn "," rawIdsString)
+    }
+  let bot = BotApp { 
+    botInitialModel = Model
+      { authorizer = Auth.authorizeUpdate adminIds
+      }
+    , botAction = flip handleUpdate
+    , botHandler = handleAction
+    , botJobs = []
+    }
   case run_level of 
     Just "production" -> startBot_ bot env
     _ -> startBot_ (traceBotDefault bot) env

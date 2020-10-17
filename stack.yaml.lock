@@ -5,9 +5,6 @@
 
 packages:
 - completed:
-    cabal-file:
-      size: 3398
-      sha256: aae7b054a8146777f6b129db3899f4b13e3b6f7526ec1bb9e1ead673a4193341
     name: telegram-bot-simple
     version: 0.2.0
     git: https://github.com/fizruk/telegram-bot-simple.git
@@ -32,6 +29,13 @@ packages:
       sha256: 02bcffba9cad572fefb4640f5fc9be68e770b32ab73efcac649db20290994c6d
   original:
     hackage: http-client-0.5.14
+- completed:
+    hackage: split-0.2.3.4@sha256:bad9bfc9e8e0aca4ac1f7b3a2767ee6b1c199d4a1b6960db5cc3d7674aee5d73,2564
+    pantry-tree:
+      size: 439
+      sha256: d931baa404f6867a23ed342c11ef27613227a7a82ba2324f95da184fffad0bd9
+  original:
+    hackage: split-0.2.3.4
 snapshots:
 - completed:
     size: 523454

@@ -5,11 +5,9 @@
 .idea
 .vscode
 # Build
+Makefile
 scripts
 *~
-# Top-level scripts
-deploy.sh
-push_image.sh
 # Misc
 LICENSE
 README.md

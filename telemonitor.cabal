@@ -27,6 +27,8 @@ executable telemonitor-exe
     Commands
     Monitor
     Monitor.Bindings
+    Auth
+    Model
   hs-source-dirs:
     app
   c-sources:
@@ -43,4 +45,5 @@ executable telemonitor-exe
     -- external deps
     , telegram-bot-simple
     , docker
+    , split
   default-language: Haskell2010

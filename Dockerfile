@@ -1,6 +1,6 @@
-# Dummmy docker image, that just copies binary from the host
-
 FROM frolvlad/alpine-glibc:alpine-3.9_glibc-2.29
+
+ARG EXE_PATH
 
 WORKDIR /opt/app
 
@@ -12,9 +12,7 @@ RUN apk add --update \
   # Clear caches
   && rm -rf /var/cache/apk/*
 
-# TODO: fix path to binary
-COPY .stack-work/dist/x86_64-linux-tinfo6/Cabal-2.4.0.1/build/telemonitor-exe/telemonitor-exe \
-    /opt/app/telemonitor-exe
+COPY ${EXE_PATH} /opt/app/telemonitor-exe
 
 ENTRYPOINT ["/sbin/tini", "--"]
 CMD [ "./telemonitor-exe" ]

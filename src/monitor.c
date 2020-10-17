@@ -3,7 +3,6 @@
 #include <sys/sysinfo.h>
 #include "monitor.h"
 
-// TODO, FIXME: this is NOT optimal
 struct sysinfo get_sysinfo() {
     struct sysinfo si;
     sysinfo(&si);
